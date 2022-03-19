@@ -1,0 +1,21 @@
+---
+import '../styles/global.css';
+const { title } = Astro.props;
+---
+<html>
+  <head>
+    <title>{ title } | Accessible Instruments</title>
+  </head>
+  <body>
+    <header class="bg-gray-300 p-4">
+        <nav>
+          <a href="/">Home</a>
+          <a href="/framework">Framework</a>
+          <a href="/tool">Evaluation Tool</a>
+        </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
