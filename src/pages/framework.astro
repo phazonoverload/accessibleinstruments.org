@@ -1,18 +1,153 @@
 ---
 import { Markdown } from 'astro/components';
 import Layout from '../layouts/Layout.astro';
+import Quality from '../components/Quality.astro';
 ---
 
 <Layout title="Framework">
-    <div class="prose">
-        <Markdown>
-            Markdown goes here.
+  <h1 class="page-title mb-4">FAME Framework</h1>
 
-            __here's more__
+  <div class="prose sm:prose-lg max-w-full mb-16">
+    <Markdown>
+      _Version: 1.0 (Draft) &bull; Author: A Dickens &bull; Last Edited:  Feb 9, 2022_
 
-            * and
-            * more
-            * again
-        </Markdown>
-    </div>
+      ## Introduction
+
+      This framework addresses the accessibility requirements of digital musical instruments (DMIs) in the context of inclusive music practice and facilitated performance. The documents within it aim to help DMI creators better understand the needs of disabled performers and facilitators. Including ways in which to incorporate accessibility into product design and evaluate existing products against accessibility guidelines. Additionally, the framework outlines the general best practices for accessibility in inclusive music making.
+
+      Included in the framework are the following documents:
+
+      * Reviewing DMIs using the FAME framework
+      * A guide to facilitated performance
+      * A list of facilitator personas
+      * A log sheet designed to allow facilitators and disabled performers to capture additional data for music making sessions (such as specific DMI settings).
+
+      The approach taken by this framework is not to provide a way to 'score' the accessibility of a DMI. After all, there is no one size fits all approach to accessibility. Therefore, an accessibility 'score' cannot respect the unique experiences of disabled people. Instead, the goal of this framework is to provide a way to help DMI creators understand the current accessibility barriers that a DMI presents and reflect upon these.
+
+      It is also important to acknowledge that accessibility is not a one time fix. This framework should be used repeatedly throughout the production lifecycle of DMIs.
+
+      ## Who is this framework for?
+
+      The following groups of people may find this framework useful:
+
+      * __Digital Musical Instrument Creators__ - This includes all people who may be involved in the process of creating digital musical instruments. For example developers, designers, product managers, and manufacturers.
+
+      * __Accessible Music Making Communities__ - Including facilitators, teachers, independent musicians, program managers, and people who purchase DMIs for community programs.
+
+      * __Researchers__ - any person conducting research in the following areas: digital musical instruments, accessible or inclusive music making, accessible technologies, and accessibility standards.
+
+      ## Important Terminology
+
+      * __Digital Musical Instrument__ - A Digital Musical Instrument (DMI) is a device that produces sound using digital technology. They can come in many forms, including some that mimic the look and feel of traditional acoustic instruments.
+
+      * __Accessible or Inclusive Music__ - These two terms are used interchangeably. The terms refer to music activities that are inclusive of disabled performers or specifically aimed at engaging groups of disabled musicians.
+
+      * __Facilitated Performance__ - Facilitated Performance is a term used to describe the practice in which a musician or performer is supported by another person (a facilitator). Facilitators can offer musical, technical, or physical support for a person depending on their needs.
+
+      ## Core Qualities
+
+      To understand a DMIs level of accessibility, this framework examines five core qualities of digital musical instruments:
+
+      <div class="border-durable quality-box">
+        <Quality title="Durability">
+        <svg slot="icon" class="w-6 h-6 text-durable" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M0 96C0 60.65 28.65 32 64 32H384C419.3 32 448 60.65 448 96V416C448 451.3 419.3 480 384 480H64C28.65 480 0 451.3 0 416V96z"
+        ></svg>
+
+        Durability questions how robust the instrument is.
+
+        A DMI must be able to work reliably within many different contexts, from practice to performance.
+
+        This quality measures the strength of the physical or virtual elements of a DMI.
+        </Quality>
+      </div>
+
+      <div class="border-flexible quality-box">
+        <Quality title="Flexibility">
+        <svg slot="icon" class="w-6 h-6 text-flexible" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M506.3 417c16.33 28-4.222 63-36.1 63H42.74c-32.89 0-53.33-35.11-36.1-63l213.2-364c16.44-28 57.66-28 73.1 0L506.3 417z"/></svg>
+
+        Flexibility examines how adaptable an instrument is.
+
+        The more flexible a DMI is, the more it can be adjusted to a musician's style or needs.
+
+        This quality measures the level of flexibility afforded by the physical or virtual elements of a DMI.
+        </Quality>
+      </div>
+
+      <div class="border-practical quality-box">
+        <Quality title="Practicality">
+        <svg slot="icon" class="w-6 h-6 text-practical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256z"/></svg>
+
+        Practicality observes how quickly an instrument can be set up.
+
+        This is an important quality for a DMI to succeed in inclusive music settings and live performance.
+
+        This quality measures the speed of setup for the physical or virtual elements of a DMI.
+        </Quality>
+      </div>
+
+      <div class="border-complex quality-box">
+        <Quality title="Complexity">
+        <svg slot="icon" class="w-6 h-6 text-complex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 512" fill="currentColor"><path d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z"/></svg>
+
+        Complexity explores how complex the user interface of an instrument is.
+
+        This quality measures the level of complexity introduced by the physical or virtual elements of a DMI.
+        </Quality>
+      </div>
+
+      <div class="border-compatible quality-box">
+        <Quality title="Compatibility">
+        <svg slot="icon" class="w-6 h-6 text-compatible" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 512" fill="currentColor"><path d="M505.8 278.6l-105.4 179.2C392.3 471.5 377.5 480 361.4 480H150.6c-16.11 0-30.93-8.516-39.05-22.17l-105.4-179.2c-8.234-14-8.234-31.27 0-45.27l105.4-179.2C119.7 40.52 134.5 32 150.6 32h210.8c16.11 0 30.93 8.516 39.05 22.16l105.4 179.2C514.1 247.4 514.1 264.6 505.8 278.6z"/></svg>
+
+        Compatibility looks at how well an instrument integrates with a musician's existing setup. This includes whether the DMI supports any form of assistive technology.
+
+        This quality measures the level of compatibility offered by the physical or virtual elements of a DMI.
+        </Quality>
+      </div>
+
+
+      ## Guidelines
+
+      These guidelines offer ways to improve accessibility of an instrument based on each of the five qualities.
+
+      1. __Durability__: A DMI should be able to withstand the physical demands of practising and performing.
+          1. Provide alternatives to physical connections.
+          2. Safeguard against accidental damage.
+          3. Provide stable operation for long periods of time.
+      2. __Flexibility__: A DMI should accommodate many musical and playing styles.
+          1. Offer more than one way of interacting with the DMI.
+          2. Allow the musician to alter the interaction settings.
+          3. Provide the ability to adapt the musician's interface.
+      3. __Practicality__: A DMI should be easy to introduce to a musician's setup.
+          1. Aim for 'plug in and play'
+          2. Provide any specialist adaptors that may be required
+          3. Enable the ability to recall settings or musician profiles
+      4. __Complexity__: A DMI should be simple enough for all levels of musicians to understand.
+          1. Provide options to minimise the detail of an interface
+          2. Ensure the interface can be understood in many contexts
+          3. Provide clear feedback in response to actions
+      5. __Compatibility__: A DMI should be compatible with a musician's setup, including hardware, software, and assistive technologies.
+          1. Expose the interface to assistive technologies
+          2. Offer multiple ways to mount the instrument
+          3. Allow open communication with the instrument
+
+      ## Reviewing DMIs using the FAME framework
+
+      Try out our [evaluation tool](/tool)!
+
+
+    </Markdown>
+  </div>
 </Layout>
+
+<style>
+p {
+  @apply leading-snug;
+}
+.quality-box {
+  @apply border-2 rounded mb-4;
+}
+.quality-box p {
+  @apply mt-2;
+}
+</style>
