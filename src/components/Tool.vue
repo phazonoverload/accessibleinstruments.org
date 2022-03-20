@@ -2,16 +2,18 @@
     <div>
         <!-- <div class="mb-4 bg-gray-100 p-4 text-xs"><code>{{answers}}</code></div> -->
         <form @submit.prevent="submit">
-            <div class="input-group border mb-4" v-for="question in closedQs" :key="question.key">
-                <p>{{ question.q }}</p>
-                <div class="radio-group">
-                    <div class="radio">
-                        <input type="radio" id="yes" value="Yes" v-model="answers.closed[question.key]">
-                        <label for="yes">Yes</label>
-                    </div>
-                    <div class="radio">
-                        <input type="radio" id="no" value="No" v-model="answers.closed[question.key]">
-                        <label for="no">No</label>
+            <div v-for="question in closedQs" :key="question.key" class="border mb-4 p-4 pb-0">
+                <div class="input-group">
+                    <p>{{ question.q }}</p>
+                    <div class="radio-group">
+                        <div class="radio">
+                            <input type="radio" id="yes" value="Yes" v-model="answers.closed[question.key]">
+                            <label for="yes">Yes</label>
+                        </div>
+                        <div class="radio">
+                            <input type="radio" id="no" value="No" v-model="answers.closed[question.key]">
+                            <label for="no">No</label>
+                        </div>
                     </div>
                 </div>
                 <details>
@@ -23,7 +25,7 @@
             </div>
         </form>
 
-        <Results class="mb-8" name="LeapMusic" :durability="0" :flexibility="3" :practicality="3" :complexity="1" :compatibility="0" />
+        <!-- <Results class="mb-8" name="LeapMusic" :durability="0" :flexibility="3" :practicality="3" :complexity="1" :compatibility="0" /> -->
     </div>
 </template>
 
@@ -246,3 +248,21 @@ export default {
     components: { Results }
 }
 </script>
+
+<style scoped>
+.input-group {
+    @apply flex flex-col sm:flex-row flex-wrap justify-between gap-x-6 gap-y-4;
+}
+details {
+    @apply w-full mb-4 mt-2;
+}
+.input-group > p {
+   @apply font-bold flex-1;
+}
+.radio-group {
+    @apply flex gap-4 justify-end;
+}
+.radio-group label {
+    @apply ml-2;
+}
+</style>
