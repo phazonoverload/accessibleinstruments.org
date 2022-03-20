@@ -6,6 +6,9 @@ const { title } = Astro.props;
 <html lang="en">
   <head>
     <title>{ title } | Accessible Instruments</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body class="px-4 flex flex-col min-h-screen">
     <header class="border wrapper bg-white shadow mt-4 sm:mt-8 mb-4 rounded mx-2 p-4 py-2 flex flex-col sm:flex-row sm:justify-between w-full">
@@ -27,7 +30,7 @@ const { title } = Astro.props;
       <slot />
     </main>
     <footer class="w-full border wrapper bg-white shadow mb-4 sm:mb-8 rounded mx-2 p-4">
-      <p class="text-center">Accessible Instruments is a project by music accessibility consultant A Dickens. <a class="underline" href="https://twitter.com/RedRoxProjects">Twitter</a>. <a href="mailto:amy@adickens.co.uk" class="underline">Email</a>.</p>
+      <p class="text-center">Accessible Instruments is a project by accessibility consultant A Dickens. <a class="underline" href="https://twitter.com/RedRoxProjects">Twitter</a>. <a href="mailto:amy@adickens.co.uk" class="underline">Email</a>.</p>
     </footer>
   </body>
 </html>

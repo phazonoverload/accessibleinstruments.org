@@ -1,7 +1,166 @@
 ---
+import { Markdown } from 'astro/components';
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Home">
   <h1 class="page-title mb-4">Facilitated Performance</h1>
-  <p>My page content, wrapped in a layout!</p>
+  <div class="border p-4 mb-4">
+    <h2 class="text-xl font-bold">Table of Contents</h2>
+    <ol>
+        <li class="mt-2"><a class="underline" href="#the-activities-of-facilitated-performance">The Activities of Facilitated Performance</a></li>
+        <li class="mt-2"><a class="underline" href="#the-roles-of-a-facilitator">The Roles of a Facilitator</a></li>
+        <li class="mt-2"><a class="underline" href="#facilitator-personas">Facilitator Personas</a></li>
+    </ol>
+  </div>
+  <article class="prose sm:prose-lg max-w-full mb-12">
+    <Markdown>
+    Facilitated Performance is a term used to describe the practice in which a musician or performer is supported by another person (a facilitator) in the activities of musical performance. Facilitators can offer musical, technical, or physical support for an individual depending on their needs. It is important to recognise that not all disabled musicians require support of this nature.
+
+    Facilitated performance is common within community accessible music making programs. Often these programs introduce new technologies over a short period of time. Which does not allow for an individual to become familiar with an instrument in a way that they can confidently use it independently (regardless of disability).
+
+    To understand how facilitated performance can impact both the adoption and use of a DMI, it is important to consider the activities that facilitators undertake and the roles they can adopt.
+
+    ## The Activities of Facilitated Performance
+
+    The activities of facilitated performance can be placed into four groups that reflect different stages of music making. These are: create, practice, perform, and reflect.
+
+    ### Stage 1: Create
+
+    The 'create' stage of the music making life-cycle is focused on discovery. Facilitator activities that are specific to the create stage include:
+
+    | Activity    | Description |
+    | ----------- | ----------- |
+    | Introducing tasks | Introducing any project briefs, providing demonstrations of musical styles, soundscapes of instruments that will be used, including performers in project decisions. |
+    | Setting up equipment | Setting up any technology, putting up stands for microphones and other devices, running cables for the technical setup, moving furniture and setting up the space, giving directions to other facilitators. |
+    | Pairing musicians with DMIs | Adjusting technology to suit musician's needs/skill |
+    | Adjusting technology to suit musician's needs/skill | Changing the sound of a DMI, altering the user input (e.g. sensitivity), making adjustments to the user interface, creating 'hacks' or work-arounds to make an instrument work better for an individual. |
+    | Recording metadata | Taking notes about each session, including all the metadata from instrument settings. |
+
+    ### Stage 2: Practice
+
+    The 'practice' stage of the music making life-cycle is focused on mastering the instruments and practising elements of a musical piece. Facilitator activities that are specific to the practice stage include:
+
+    | Activity    | Description |
+    | ----------- | ----------- |
+    | Recalling setup | Recalling the settings of technology used, positioning of stands and all other elements required for practice. |
+    | Directing | Usually musical direction, including providing cues for musicians, keeping time, or prompting performers one to one. |
+    | Assisting | Providing physical or musical support to an individual musician. |
+    | Observing | Watching the performer or group of performers as a spectator and making notes for improvements. |
+    | Giving feedback | Delivering constructive feedback on progress throughout. |
+
+    ### Stage 3: Perform
+
+    The 'perform' stage of the music making life-cycle is about sharing work through performance. Facilitator activities that are specific to the 'perform' stage include:
+
+    | Activity    | Description |
+    | ----------- | ----------- |
+    | Setting up for performance | Setting up the stage environment and equipment, including all technology settings and testing live sound levels with front of house engineers. |
+    | Performing 'comfort checks' | Checking with each individual performer that they are happy with their technical and physical setup. Dealing with any concerns about the setup.  |
+    | On-stage directing | Providing direction for a group or individual performer whilst on stage. Working alongside conductors/musical directors. This can include being visibly on stage with the performer(s). |
+    | On-stae assisting | Assisting a performer one on one whilst on stage. This includes being visible on stage with the performer during the performance. |
+
+    ### Stage 4: Reflect
+
+    The 'reflect' phase of the music making life-cycle is about evaluating progress. Facilitator activities that are specific to the 'reflect' stage are:
+
+    | Activity    | Description |
+    | ----------- | ----------- |
+    | Reviewing | Watching or listening to recorded material from a performance. Leading discussions about the experience with the performer(s) and other facilitators. |
+    | Observing | Recording notes of the performer(s) reflections during review sessions. |
+    | Giving feedback | Delivering feedback and responding to performer reflections. |
+
+    ## The Roles of a Facilitator
+
+    ### Musical
+
+    | Role    | Description |
+    | ----------- | ----------- |
+    | Producer | Leads the production throughout the stages of a project, works with the performer(s) to make creative decisions. |
+    | Director | Directs and provides prompts for a performer or group of performers. |
+    | Teacher | Introduces concepts, teaches technique, demonstrates musical tasks. |
+
+    ### Technical
+
+    | Role    | Description |
+    | ----------- | ----------- |
+    | DAW Operator | Manages session material within the Digital Audio Workstation software, including all metadata needed (track names, sound samples, sections) and records material when required. |
+    | Audio Visual Technician | Routes and manages all audio visual signals, includes setting up audio cables, interfaces and live sound output devices. |
+    | Equipment Technician | Sets up and monitors all equipment including microphone stands, power supplies and cables, as well as any DMIs in use. |
+    | Technical Lead | Coordinates all technology, records necessary information about sessions about technical requirements. Directs other technicians. |
+
+    ### Physical
+
+    | Role    | Description |
+    | ----------- | ----------- |
+    | Individual Support | Provides one to one support for a performer or more focused support to a few performers. Includes managing assistive equipment, as well as helping guide and monitor interactions. |
+
+    ## Facilitator Personas
+
+    When designing DMIs that could be used in facilitated performance, it is important to consider facilitators as another user of a DMI alongside the musician. It is also worth noting that not all facilitators possess the same knowledge and skill-set.
+
+    Provided are some facilitator personas that can be used in the development processes of DMIs. Each of these personas exhibits a facilitator skill-set that has been developed from real-world observations. These provide close to real life examples of people that work within accessible music making.
+
+    For a perspective of how a DMI might be used in a facilitated performance environment, consider how each of these personas may experience the instrument. Think about what personal challenges they might face in using the DMI and in assisting a performer with it.
+
+    ### Persona 1: Jay
+
+    - Age: 31
+    - Job: DJ
+    - Roles in accessible music workshops: Producer and DAW Operator
+    - About Jay:
+        - Tech savvy but would not label themselves an expert
+        - Works with industry standard software daily
+        - Has their own hacks for working around equipment failure
+        - Owns all the technical kit needed to run a workshop
+        - Limited on time outside of workshops
+        - Spends 50% of their career DJing the other 50% on community workshops and programs
+        - Has worked in inclusive music making for 5 years
+        - Has tendencies to work to their own rhythm and sometimes doesn't communicate very well
+        - Not great at sharing knowledge, “I had to learn it on my own, so should you”
+
+    ### Persona 2: Alex
+
+    - Age: 45
+    - Job: Teacher
+    - Roles in accessible music workshops: Individual Support & Teacher
+    - About Alex:
+        - Music Teacher at a school
+        - Happy to assist in any form
+        - Not very technical - finds it hard to use technology they are not familiar with
+        - Really wants to improve access to music
+        - Great at following directions in workshops
+        - Always asking questions and trying to make the most of opportunities
+        - Limited by school technology offerings and budgets
+
+
+    ### Persona 3: Charlie
+
+    - Age: 28
+    - Job: Musician
+    - Roles in accessible music workshops: Director and Equipment Technician
+    - About Charlie:
+        - Trained musician in 3 instruments
+        - Provides lessons for young disabled musicians
+        - Happy to support in all roles and switches between them easily
+        - Often focused on prompting and directing, or one to one support
+        - Very soft natured, great at encouraging musical behaviour
+        - Sometimes needs reminders of how some audio equipment works and support with solving technical issues
+
+
+    ### Persona 4: Dylan
+
+    - Age: 49
+    - Job: Community Program Manager
+    - Roles in accessible music workshops: Technical Lead, Director, and Audio Visual Technician
+    - About Dylan:
+        - Worked in community music programs for 15 years
+        - Plays an instrument to a high standard
+        - Performs in a band but more as a hobby
+        - Spends a lot of time and energy planning accessible music workshops
+        - Is responsible for sourcing equipment, as well as testing and maintaining current equipment
+        - Values flexibility of technology, willing to invest in something if it can be used in many settings
+
+
+    </Markdown>
+  </article>
 </Layout>
