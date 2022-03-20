@@ -1,18 +1,42 @@
 <template>
-    <div>
-        <!-- <div class="mb-4 bg-gray-100 p-4 text-xs"><code>{{answers}}</code></div> -->
+    <div class="pb-8">
         <form @submit.prevent="submit">
-            <div v-for="question in closedQs" :key="question.key" class="border mb-4 p-4 pb-0">
+            <h2 class="section-title">About You</h2>
+
+            <div v-for="question in submitterQs" :key="question.key" class="border rounded mb-4 p-4">
+                <label :for="question.key">{{ question.q }}</label>
+                <input type="text" :id="question.key" v-model="answers.submitter[question.key]">
+            </div>
+
+            <h2 class="section-title">About Instrument</h2>
+
+            <div v-for="question in instrumentQs" :key="question.key" class="border rounded mb-4 p-4">
+                <label :for="question.key">
+                    <span v-if="question.optional">{{ question.q }} (optional)</span>
+                    <span v-else>{{ question.q }}</span>
+                </label>
+                <select v-if="question.type === 'boolean'" v-model="answers.instrument[question.key]">
+                    <option disabled value="">Please select value</option>
+                    <option :value="true">Yes</option>
+                    <option :value="false">No</option>
+                </select>
+                <input v-else-if="question.type === 'number'" type="number" :id="question.key" v-model="answers.instrument[question.key]">
+                <input v-else type="text" :id="question.key" v-model="answers.instrument[question.key]">
+            </div>
+
+            <h2 class="section-title">Evaluation Questions</h2>
+
+            <div v-for="question in closedQs" :key="question.key" class="border rounded mb-4 p-4 pb-0">
                 <div class="input-group">
                     <p>{{ question.q }}</p>
                     <div class="radio-group">
                         <div class="radio">
-                            <input type="radio" id="yes" value="Yes" v-model="answers.closed[question.key]">
-                            <label for="yes">Yes</label>
+                            <input type="radio" :id="`${question.key}-yes`" value="Yes" v-model="answers.closed[question.key]">
+                            <label :for="`${question.key}-yes`">Yes</label>
                         </div>
                         <div class="radio">
-                            <input type="radio" id="no" value="No" v-model="answers.closed[question.key]">
-                            <label for="no">No</label>
+                            <input type="radio" :id="`${question.key}-no`" value="No" v-model="answers.closed[question.key]">
+                            <label :for="`${question.key}-no`">No</label>
                         </div>
                     </div>
                 </div>
@@ -23,7 +47,16 @@
                     <p>{{ question.help }}</p>
                 </details>
             </div>
+
+            <input type="submit" @click="checkMissingAnswers" class="w-full block bg-flexible text-white px-4 py-2 text-base text-center rounded mt-8 cursor-pointer focus:outline-compatible focus:outline-2">
         </form>
+
+        <div v-if="errors.length > 0" class="bg-red-200 p-4 border border-red-500 mt-4">
+            <h2 class="font-bold text-2xl mb-2">Errors</h2>
+            <ol>
+                <li v-for="error in errors" :key="error" class="mt-2">{{ error }}</li>
+            </ol>
+        </div>
 
         <!-- <Results class="mb-8" name="LeapMusic" :durability="0" :flexibility="3" :practicality="3" :complexity="1" :compatibility="0" /> -->
     </div>
@@ -38,7 +71,25 @@ export default {
     },
     methods: {
         submit() {
+            const errors = this.checkMissingAnswers
+            if(errors) return
+        },
+        checkMissingAnswers() {
+            this.errors = []
+            const questions = [...this.submitterQs, ...this.instrumentQs, ...this.closedQs].filter(q => !q.optional)
+            const answers = [
+                Object.entries(this.answers.submitter).map(item => ({ [item[0]]: item[1] })),
+                Object.entries(this.answers.instrument).map(item => ({ [item[0]]: item[1] })),
+                Object.entries(this.answers.closed).map(item => ({ [item[0]]: item[1] })),
+            ].flat()
 
+            const missing = questions.filter(question => {
+                const foundAnswer = answers.find(answer => answer[question.key])
+                return !foundAnswer
+            })
+
+            this.errors = missing.map(m => `Answer required for "${m.q}"`)
+            return this.errors.length > 0
         }
     },
     watch: {
@@ -46,46 +97,50 @@ export default {
     },
     data() {
         return {
+            errors: [],
             answers: {
                 submitter: {},
                 instrument: {},
-                closed: {},
-                open: {}
+                closed: {}
             },
             submitterQs: [
                 {
-                    q: "",
+                    q: "What is your name?",
                     key: "submitter_name"
                 },
                 {
-                    q: "",
+                    q: "What is your email address?",
                     key: "submitter_email"
                 },
             ],
             instrumentQs: [
                 {
-                    q: "",
+                    q: "What is the name of the instrument?",
                     key: "instrument_name"
                 },
                 {
-                    q: "",
+                    q: "Can you provide a short description of the instrument?",
                     key: "instrument_description"
                 },
                 {
-                    q: "",
+                    q: "Who manufactures the instrument?",
                     key: "instrument_manufacturer"
                 },
                 {
-                    q: "",
-                    key: "instrument_link"
+                    q: "Is the instrument publicly available for others to buy?",
+                    key: "instrument_public",
+                    type: 'boolean',
                 },
                 {
-                    q: "",
-                    key: "instrument_cost_gbp"
+                    q: "Please provide a link where people can learn more about the instrument",
+                    key: "instrument_link",
+                    optional: true
                 },
                 {
-                    q: "",
-                    key: "instrument_type" // iPad Application, Hardware, Software
+                    q: "What is the cost of the instrument in GBP (£)?",
+                    key: "instrument_cost_gbp",
+                    type: 'number',
+                    optional: true
                 },
 
             ],
@@ -190,58 +245,6 @@ export default {
                     help: "Moving, blinking, or auto-updates to an interface can be distracting. A musician should be able remove any distracting actions apart from those that may be considered essential, for example a blinking LED indicating tempo. Musicians with certain types of cognitive disability can struggle to use interfaces with lots of distracting elements such as lights or animations.",
                     key: "hide_distractions"
                 },
-            ],
-            openQs: [
-                {
-                    q: "How does the musician interact with the DMI?",
-                    help: "Think about every step of making music with the instrument. Consider the level of strength or dexterity an action may require. Note how each of the controls are operated. Try to explore if there are any situations in which the DMI would not respond to a musician's input.",
-                    key: "interact"
-                },
-                {
-                    q: "What genres of music can the DMI be used in?",
-                    help: "Consider the type of interface the DMI has, what are the genres of music where it might be more commonly understood. If an instrument can be used across a wide range of genres, think about the styles of music where it might be difficult to use. Challenges could include the interface not offering a playing style that is required to achieve a certain sound or musical technique.",
-                    key: "genres"
-                },
-                {
-                    q: "Does the environment change the way a DMI works?",
-                    help: "Evaluate whether anything in the environment could impact the use of the instrument. Changes in lighting are common between practice and performance spaces. In some live performance scenarios water might even be a risk factor. Think about how these environmental factors could make the interface harder to navigate.",
-                    key: "environment"
-                },
-                {
-                    q: "Would a disabled musician require some form of support to use this DMI?",
-                    help: "In using an instrument a disabled musician may require some support throughout the process. Consider what kind of support, how much, and when the assistance might be required for the DMI. Think about whether a disabled musician could engage with all parts of the setup process, navigating instrument preferences, authorisation. If support is required to use the DMIs, consider whether this is likely to be only at certain times or necessary throughout.",
-                    key: "support"
-                },
-                {
-                    q: "Are the action and output sound paired in a way that is obvious to an audience?",
-                    help: "Audience perception of an instrument is an important part of music performance. Think about how a musician interacts with the instrument. A DMI should aim to make the relationship between a musician's actions and the instrument output clear to an audience. Consider if any adaptations made to the instrument, or changes to the way it is used for a disabled musician could impact this. If this connection between action and output relies on the type of sound choice, think about whether any guidance is provided for the musician.",
-                    key: "obvious"
-                },
-                {
-                    q: "What elements of the DMI can be altered to suit a musician's style or needs?",
-                    help: "Think about the structure of the instrument and how fixed it is. Consider how it might be adapted for different needs, this could be through changing parts of the physical interface, settings that make it more or less responsive. For a graphical user interface, this could include changing the size of interaction areas on the screen or altering a colour profile. Create a list of the potential ways the DMI could be adapted.",
-                    key: "style"
-                },
-                {
-                    q: "What are the required actions from switching on the DMI to making sound with it?",
-                    help: "Create a list of all the actions involved in “setting up” the DMI for a music making session. Consider whether there is additional equipment needed for the instrument to produce sound, or extra software or updates that might need to be downloaded. If this is the case, note whether actions like downloading, authenticating, or pairing with other equipment are a one-time action on the first use or will need to occur with each use.",
-                    key: "actions"
-                },
-                {
-                    q: "How could the DMI be damaged?",
-                    help: "Consider the instrument and where it has potential to be easily damaged. Wired only connections can be problematic for causing tripping hazards on stage, for example. Is there a requirement to charge the instrument regularly and as a result could it fail in long periods of use? The physicality of the DMI is also important here, think about whether there are any elements to the physical device that could be damaged beyond repair. For software instruments, think about the device used to interact with the software. Also consider the technology used to build the software and ways in which this could be fragile.",
-                    key: "damage"
-                },
-                {
-                    q: "Does the DMI rely on a single method of feedback?",
-                    help: "Think about how the musician receives feedback from their actions when using the instrument. List the ways in which the DMI presents feedback to the musician. Feedback can be auditory, tactile (haptic), or visual. If the instrument uses a graphical user interface of any kind, note whether the feedback presented visually on the screen is presented in any other form.",
-                    key: "feedback"
-                },
-                {
-                    q: "How does the DMI work with Assistive Technology?",
-                    help: "Some examples of assistive technology includes screen readers, magnification tools, colour overlays, guided access (available on iOS to limit the interaction areas of a screen), text enlargement, etc. When used with assistive technology, make note of how the instrument behaves. Go through the whole experience of the instrument using the assistive technology. Find any points where this differs from the experience without it.",
-                    key: "assistive"
-                },
             ]
         }
     },
@@ -250,6 +253,9 @@ export default {
 </script>
 
 <style scoped>
+.section-title {
+    @apply font-bold text-2xl mb-2 mt-8;
+}
 .input-group {
     @apply flex flex-col sm:flex-row flex-wrap justify-between gap-x-6 gap-y-4;
 }
@@ -264,5 +270,8 @@ details {
 }
 .radio-group label {
     @apply ml-2;
+}
+input[type=text], input[type=number], select {
+    @apply border block w-full px-2 py-1;
 }
 </style>
