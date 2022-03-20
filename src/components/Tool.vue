@@ -2,14 +2,12 @@
     <div class="pb-8">
         <form @submit.prevent="submit">
             <h2 class="section-title">About You</h2>
-
             <div v-for="question in submitterQs" :key="question.key" class="border rounded mb-4 p-4">
                 <label :for="question.key">{{ question.q }}</label>
                 <input type="text" :id="question.key" v-model="answers.submitter[question.key]">
             </div>
 
             <h2 class="section-title">About Instrument</h2>
-
             <div v-for="question in instrumentQs" :key="question.key" class="border rounded mb-4 p-4">
                 <label :for="question.key">
                     <span v-if="question.optional">{{ question.q }} (optional)</span>
@@ -20,12 +18,11 @@
                     <option :value="true">Yes</option>
                     <option :value="false">No</option>
                 </select>
-                <input v-else-if="question.type === 'number'" type="number" :id="question.key" v-model="answers.instrument[question.key]">
+                <input v-else-if="question.type === 'number'" type="number" step="any" :id="question.key" v-model="answers.instrument[question.key]">
                 <input v-else type="text" :id="question.key" v-model="answers.instrument[question.key]">
             </div>
 
             <h2 class="section-title">Evaluation Questions</h2>
-
             <div v-for="question in closedQs" :key="question.key" class="border rounded mb-4 p-4 pb-0">
                 <div class="input-group">
                     <p>{{ question.q }}</p>
@@ -48,7 +45,7 @@
                 </details>
             </div>
 
-            <input type="submit" @click="checkMissingAnswers" class="w-full block bg-flexible text-white px-4 py-2 text-base text-center rounded mt-8 cursor-pointer focus:outline-compatible focus:outline-2">
+            <input v-if="!submitted" type="submit" @click="checkMissingAnswers" class="w-full block bg-flexible text-white px-4 py-2 text-base text-center rounded mt-8 cursor-pointer focus:outline-compatible focus:outline-2">
         </form>
 
         <div v-if="errors.length > 0" class="bg-red-200 p-4 border border-red-500 mt-4">
@@ -58,7 +55,7 @@
             </ol>
         </div>
 
-        <!-- <Results class="mb-8" name="LeapMusic" :durability="0" :flexibility="3" :practicality="3" :complexity="1" :compatibility="0" /> -->
+        <Results v-if="scores" class="my-8" :name="scores.instrument_name" :durability="scores.score_durability" :flexibility="scores.score_flexibility" :practicality="scores.score_practicality" :complexity="scores.score_complexity" :compatibility="scores.score_compatibility" />
     </div>
 </template>
 
@@ -67,12 +64,23 @@ import Results from './Results.vue'
 
 export default {
     created() {
-        // load default answers
+        // load saved answers
     },
     methods: {
-        submit() {
-            const errors = this.checkMissingAnswers
+        async submit() {
+            const errors = this.checkMissingAnswers()
             if(errors) return
+
+            try {
+                this.scores = await fetch('/.netlify/functions/submit', {
+                    method: 'POST',
+                    body: JSON.stringify(this.payload)
+                }).then(r => r.json())
+                this.submitted = true
+            } catch(error) {
+                console.log({ error })
+                alert('There has been a problem.')
+            }
         },
         checkMissingAnswers() {
             this.errors = []
@@ -103,6 +111,8 @@ export default {
                 instrument: {},
                 closed: {}
             },
+            submitted: false,
+            scores: false,
             submitterQs: [
                 {
                     q: "What is your name?",
@@ -130,6 +140,7 @@ export default {
                     q: "Is the instrument publicly available for others to buy?",
                     key: "instrument_public",
                     type: 'boolean',
+                    optional: true
                 },
                 {
                     q: "Please provide a link where people can learn more about the instrument",
@@ -246,6 +257,22 @@ export default {
                     key: "hide_distractions"
                 },
             ]
+        }
+    },
+    computed: {
+        payload() {
+            const allAnswers = [
+                Object.entries(this.answers.submitter).map(item => ({ [item[0]]: item[1] })),
+                Object.entries(this.answers.instrument).map(item => ({ [item[0]]: item[1] })),
+                Object.entries(this.answers.closed).map(item => ({ [item[0]]: item[1] })),
+            ].flat()
+
+            const answers = {}
+            for(let answer of allAnswers) {
+                const key = Object.keys(answer)[0]
+                answers[key] = answer[key]
+            }
+            return answers
         }
     },
     components: { Results }

@@ -1,6 +1,17 @@
 ---
+import Quality from '../components/Quality.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="Home">
-  <p>My page content, wrapped in a layout!</p>
+  <div class="hero text-center mb-8">
+    <h1 class="font-bold text-2xl sm:text-3xl md:text-4xl">Accessible Instruments</h1>
+    <p class="max-w-xl mx-auto mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nobis sint suscipit dolorem laudantium doloremque saepe earum temporibus.</p>
+  </div>
+  <div class="flex flex-wrap gap-4 justify-center">
+    <Quality title="Durability" icon="durability" tw="!pb-2 !border-durable" />
+    <Quality title="Flexibility" icon="flexibility" tw="!pb-2 !border-flexible" />
+    <Quality title="Practicality" icon="practicality" tw="!pb-2 !border-practical" />
+    <Quality title="Complexity" icon="complexity" tw="!pb-2 !border-complex" />
+    <Quality title="Compatibility" icon="compatibility" tw="!pb-2 !border-compatible" />
+  </div>
 </Layout>

@@ -15,5 +15,8 @@
     "astro": "^0.24.3",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.23"
+  },
+  "dependencies": {
+    "airtable-plus": "^1.0.4"
   }
 }

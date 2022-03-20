@@ -4,11 +4,11 @@ const { title, icon, tw = '' } = Astro.props
 ---
 
 <div class={'box p-4 not-prose border-gray-600 ' + tw}>
-  <div class="flex justify-start items-center mb-2">
+  <div class="flex justify-start items-center">
     <Icon name={icon} tw="h-6 w-6" />
     <h3 class="text-2xl font-bold mb-2 leading-4 uppercase pt-1.5 text-black">{ title }</h3>
   </div>
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-2 mt-2 empty:hidden">
     <slot />
   </div>
 </div>
