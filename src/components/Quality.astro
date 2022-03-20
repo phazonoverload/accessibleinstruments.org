@@ -1,18 +1,22 @@
 ---
-const { title } = Astro.props
+import Icon from './Icon.vue'
+const { title, icon, tw = '' } = Astro.props
 ---
 
-<div class="p-4 not-prose">
-    <div class="flex justify-start items-center mb-2">
-        <div class="icon">
-            <slot name="icon" />
-        </div>
-        <h3 class="text-2xl font-bold mb-2 leading-4 uppercase pt-1.5 text-black">{ title }</h3>
-    </div>
+<div class={'box p-4 not-prose border-gray-600 ' + tw}>
+  <div class="flex justify-start items-center mb-2">
+    <Icon name={icon} tw="h-6 w-6" />
+    <h3 class="text-2xl font-bold mb-2 leading-4 uppercase pt-1.5 text-black">{ title }</h3>
+  </div>
+  <div class="flex flex-col gap-2">
     <slot />
+  </div>
 </div>
 
 <style>
+.box {
+    @apply border-2 rounded
+}
 h3 {
     @apply ml-2
 }

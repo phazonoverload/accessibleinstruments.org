@@ -1,6 +1,18 @@
 ---
+import { Markdown } from 'astro/components';
 import Layout from '../layouts/Layout.astro';
+import Tool from '../components/Tool.vue';
 ---
 <Layout title="Evaluation Tool">
-  Tool
+  <h1 class="page-title mb-4">Evaluation Tool</h1>
+   <div class="prose sm:prose-lg max-w-full mb-8">
+    <Markdown>
+      A series of questions have been developed that address each of the five core qualities outlined in the FAME framework. The first part of reviewing the accessibility of a DMI involves answering 20 closed questions that can only be answered with either 'yes' or 'no'.
+
+      The answers to these questions help to build an accessibility profile of a DMI, related to the five core qualities outlined in the framework. It is important to note this is not designed to be an accessibility score.
+
+      These questions are accompanied by a set of 10 open questions, found in part two. These open questions invite a more reflective look at an instrument's potential barriers to accessibility.
+    </Markdown>
+  </div>
+  <Tool client:load />
 </Layout>
