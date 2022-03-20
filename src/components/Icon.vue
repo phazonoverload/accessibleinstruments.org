@@ -1,5 +1,5 @@
 <template>
-    <svg :class="`${colorClass} ${tw}`" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 512" fill="currentColor">
+    <svg :class="`${colorClass} ${tw}`" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 512" fill="currentColor">
         <path v-if="name === 'durability'" d="M0 96C0 60.65 28.65 32 64 32H384C419.3 32 448 60.65 448 96V416C448 451.3 419.3 480 384 480H64C28.65 480 0 451.3 0 416V96z" />
         <path v-if="name === 'flexibility'" d="M506.3 417c16.33 28-4.222 63-36.1 63H42.74c-32.89 0-53.33-35.11-36.1-63l213.2-364c16.44-28 57.66-28 73.1 0L506.3 417z" />
         <path v-if="name === 'practicality'" d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256z" />
