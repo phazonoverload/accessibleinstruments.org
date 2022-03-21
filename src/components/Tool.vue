@@ -9,10 +9,7 @@
 
             <h2 class="section-title">About Instrument</h2>
             <div v-for="question in instrumentQs" :key="question.key" class="border rounded mb-4 p-4">
-                <label :for="question.key">
-                    <span v-if="question.optional">{{ question.q }} (optional)</span>
-                    <span v-else>{{ question.q }}</span>
-                </label>
+                <label :for="question.key">{{ question.q }}</label>
                 <select v-if="question.type === 'boolean'" v-model="answers.instrument[question.key]">
                     <option disabled value="">Please select value</option>
                     <option :value="true">Yes</option>
@@ -143,12 +140,12 @@ export default {
                     optional: true
                 },
                 {
-                    q: "Please provide a link where people can learn more about the instrument",
+                    q: "Please provide a link where people can learn more about the instrument (optional)",
                     key: "instrument_link",
                     optional: true
                 },
                 {
-                    q: "What is the cost of the instrument in GBP (£)?",
+                    q: "What is the cost of the instrument in GBP (£)? (optional)",
                     key: "instrument_cost_gbp",
                     type: 'number',
                     optional: true
